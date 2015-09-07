@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
+import xmlrpclib
 from oauth2 import Provider
 from oauth2.error import UserNotAuthenticated
 from oauth2.web import ResourceOwnerGrantSiteAdapter
@@ -15,12 +16,16 @@ class TestSiteAdapter(ResourceOwnerGrantSiteAdapter):
     def authenticate(self, request, environ, scopes, client):
         username = request.post_param("username")
         password = request.post_param("password")
+        server = "http://karl.novareto.de:8022/app"
+        portal = xmlrpclib.Server(server)
+        if portal.checkAuth(username, password):
+            return {'data': 'test'}, username
+        raise UserNotAuthenticated
         # A real world application could connect to a database, try to
         # retrieve username and password and compare them against the input
-        if username == "cklinger" and password == "test":
-            return
-
-        raise UserNotAuthenticated
+        #if username == "cklinger" and password == "test":
+        #    return
+#
 
 
 def make_application(token_store, client_store, token_gen):

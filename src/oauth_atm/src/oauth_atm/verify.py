@@ -74,6 +74,8 @@ def verify_app(token_store, client_store):
                         'status': 'Token valid',
                         'expiration': from_timestamp(token.expires_at),
                         'client': token.client_id,
+                        'userid': token.user_id,
+                        'data': token.data,
                     })]
                 else:
                     start_response(
