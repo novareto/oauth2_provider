@@ -37,8 +37,9 @@ setup(name=name,
       classifiers=[
           'Operating System :: OS Independent',
           'Programming Language :: Python',
-          ],
-      entry_points="""
-      # -*- Entry points: -*-
-      """,
+          ],      
+      entry_points={
+        'console_scripts': [
+            'oauth_atm = oauth_atm.example:run']
+      },
       )
