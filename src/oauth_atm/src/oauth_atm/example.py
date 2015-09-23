@@ -31,6 +31,6 @@ def run():
     cherrypy.tree.graft(
         verify.make_application(tokens, clients),
         '/verify')
-    
+
     cherrypy.engine.start()
     cherrypy.engine.block()

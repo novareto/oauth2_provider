@@ -16,8 +16,9 @@ class TestSiteAdapter(ResourceOwnerGrantSiteAdapter):
     def authenticate(self, request, environ, scopes, client):
         username = request.post_param("username")
         password = request.post_param("password")
-        server = "http://karl.novareto.de:8022/app"
+        server = "http://localhost:8080/app"
         portal = xmlrpclib.Server(server)
+        print server
         if portal.checkAuth(username, password):
             return {'data': 'test'}, username
         raise UserNotAuthenticated
